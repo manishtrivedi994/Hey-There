@@ -15,6 +15,7 @@ import {Text} from 'react-native';
 import {setRange} from '../../state/filter';
 import SizedBox from '../../components/sized-box';
 import TouchableImage from '../../components/touchable-image';
+import {DELTA_CONSTANTS} from '../../utils/constants';
 
 export default function Map() {
   const dispatch = useDispatch();
@@ -25,10 +26,9 @@ export default function Map() {
   const [filteredMarkers, setFilteredMarkers] = useState([]);
 
   const [region, setRegion] = useState({
-    latitude: '28.383449',
-    longitude: '77.052160',
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitude: 28.383449,
+    longitude: 77.05216,
+    ...DELTA_CONSTANTS,
   });
 
   const mapRef = useRef(null);
@@ -51,6 +51,7 @@ export default function Map() {
         setCurrentUser({
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
+          ...DELTA_CONSTANTS,
           title: 'Me',
           description: 'My Current location',
           id: uuidGenerator(),
@@ -61,6 +62,7 @@ export default function Map() {
         {
           latitude: info.coords.latitude,
           longitude: info.coords.longitude,
+          ...DELTA_CONSTANTS,
         },
         1000,
       );
